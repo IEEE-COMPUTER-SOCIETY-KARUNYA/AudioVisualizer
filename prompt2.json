@@ -1,0 +1,480 @@
+{
+  "project": {
+    "name": "Liquid AI Orb - Audio Reactive Voice Assistant UI",
+    "version": "2.0.0",
+    "type": "web-application",
+    "description": "A mesmerizing liquid metal orb visualization that morphs and flows in response to audio, creating an AI voice assistant aesthetic with fluid, organic movements"
+  },
+  "visual_reference": {
+    "inspiration": "Liquid metal sphere with flowing, twisted internal structures",
+    "key_characteristics": [
+      "Smooth, continuous surface deformations",
+      "Iridescent color gradients (blue, purple, pink, orange)",
+      "Organic, fluid-like movements",
+      "Glass-like or liquid metal material appearance",
+      "Internal twisted ribbon structures",
+      "Highly reflective surface with subsurface scattering"
+    ]
+  },
+  "technical_stack": {
+    "required_technologies": {
+      "3d_engine": "Three.js r128+",
+      "animation": "GSAP 3.12+ with MorphSVGPlugin",
+      "shaders": "Custom GLSL shaders for liquid effects",
+      "audio": "Web Audio API with real-time FFT",
+      "physics": "Optional: LiquidFun.js or custom vertex physics"
+    },
+    "rendering_pipeline": {
+      "renderer": "WebGLRenderer with antialias",
+      "post_processing": "EffectComposer with custom passes",
+      "color_space": "sRGB with HDR support"
+    }
+  },
+  "orb_specifications": {
+    "geometry": {
+      "base_mesh": {
+        "type": "High-resolution IcoSphere",
+        "subdivisions": 6,
+        "vertex_count": "40,000-80,000",
+        "topology": "Quad-dominant for smooth deformation"
+      },
+      "internal_structures": {
+        "ribbon_system": {
+          "count": "3-5 twisted ribbons",
+          "geometry": "Bezier curves extruded to ribbons",
+          "behavior": "Continuous flow and twist",
+          "material": "Same as outer shell with opacity variations"
+        }
+      }
+    },
+    "material_system": {
+      "shader_type": "Custom PBR with modifications",
+      "base_properties": {
+        "metalness": 0.8,
+        "roughness": 0.1,
+        "clearcoat": 1.0,
+        "clearcoatRoughness": 0.0,
+        "ior": 1.45,
+        "transmission": 0.7,
+        "thickness": 1.5
+      },
+      "custom_shader_features": {
+        "iridescence": {
+          "implementation": "Thin-film interference simulation",
+          "color_ramp": ["#4A90E2", "#9B59B6", "#E74C3C", "#F39C12", "#1ABC9C"],
+          "intensity": "Mapped to viewing angle and audio amplitude"
+        },
+        "subsurface_scattering": {
+          "enabled": true,
+          "color": "Audio-reactive gradient",
+          "depth": "Variable based on frequency"
+        },
+        "fresnel_effects": {
+          "rim_lighting": "Dynamic intensity",
+          "color_shift": "Based on audio spectrum"
+        }
+      }
+    },
+    "deformation_system": {
+      "vertex_displacement": {
+        "noise_layers": [
+          {
+            "type": "Simplex noise",
+            "frequency": 0.5,
+            "amplitude": "0.1 * audioLowFreq",
+            "speed": 0.3
+          },
+          {
+            "type": "Turbulence noise",
+            "frequency": 2.0,
+            "amplitude": "0.05 * audioMidFreq",
+            "speed": 0.8
+          },
+          {
+            "type": "Curl noise",
+            "frequency": 4.0,
+            "amplitude": "0.02 * audioHighFreq",
+            "speed": 1.5
+          }
+        ],
+        "formula": "vertex += normal * (noise1 + noise2 + noise3) * masterAmplitude"
+      },
+      "morphing_targets": {
+        "shape_states": [
+          {
+            "name": "idle",
+            "description": "Perfect sphere with subtle waves"
+          },
+          {
+            "name": "low_frequency",
+            "description": "Bulging, blob-like deformations"
+          },
+          {
+            "name": "mid_frequency",
+            "description": "Twisted, spiral patterns"
+          },
+          {
+            "name": "high_frequency",
+            "description": "Spiky, crystalline formations"
+          }
+        ],
+        "blend_mode": "Weighted average based on frequency bands"
+      }
+    }
+  },
+  "audio_reactive_behaviors": {
+    "frequency_mapping": {
+      "sub_bass": {
+        "range": "20-60Hz",
+        "visual_effect": "Overall scale pulsing",
+        "intensity_multiplier": 1.5,
+        "smoothing": 0.9
+      },
+      "bass": {
+        "range": "60-250Hz",
+        "visual_effect": "Large wave deformations",
+        "intensity_multiplier": 1.2,
+        "smoothing": 0.85
+      },
+      "low_mid": {
+        "range": "250-1000Hz",
+        "visual_effect": "Ribbon twisting speed",
+        "intensity_multiplier": 1.0,
+        "smoothing": 0.8
+      },
+      "high_mid": {
+        "range": "1000-4000Hz",
+        "visual_effect": "Surface detail complexity",
+        "intensity_multiplier": 0.8,
+        "smoothing": 0.7
+      },
+      "presence": {
+        "range": "4000-8000Hz",
+        "visual_effect": "Iridescence shifting",
+        "intensity_multiplier": 0.6,
+        "smoothing": 0.6
+      },
+      "brilliance": {
+        "range": "8000-20000Hz",
+        "visual_effect": "Sparkle particles, rim glow",
+        "intensity_multiplier": 0.4,
+        "smoothing": 0.5
+      }
+    },
+    "beat_detection": {
+      "algorithm": "Spectral flux with adaptive threshold",
+      "on_beat_actions": [
+        {
+          "trigger": "Kick drum (20-100Hz)",
+          "action": "Radial pulse expansion",
+          "duration": "200ms",
+          "easing": "elastic.out(1, 0.3)"
+        },
+        {
+          "trigger": "Snare (200-400Hz)",
+          "action": "Twist deformation",
+          "duration": "150ms",
+          "easing": "power3.out"
+        },
+        {
+          "trigger": "Hi-hat (5000-10000Hz)",
+          "action": "Surface ripple",
+          "duration": "100ms",
+          "easing": "expo.out"
+        }
+      ]
+    },
+    "voice_detection": {
+      "enabled": true,
+      "frequency_range": "80-255Hz (human voice)",
+      "visual_response": {
+        "speaking": "Smooth, flowing deformations",
+        "silence": "Return to idle state",
+        "pitch_tracking": "Color temperature shift"
+      }
+    }
+  },
+  "animation_system": {
+    "gsap_configuration": {
+      "timelines": {
+        "master": {
+          "duration": "infinite",
+          "repeat": -1,
+          "smoothChildTiming": true
+        },
+        "idle_animation": {
+          "description": "Continuous background movement",
+          "animations": [
+            {
+              "target": "orb.rotation",
+              "props": { "y": "+=6.28" },
+              "duration": 20,
+              "ease": "none"
+            },
+            {
+              "target": "ribbons.twist",
+              "props": { "angle": "+=360" },
+              "duration": 15,
+              "ease": "sine.inOut"
+            }
+          ]
+        },
+        "reactive_animation": {
+          "description": "Audio-triggered animations",
+          "dynamic": true,
+          "creation": "On audio event"
+        }
+      },
+      "morph_animations": {
+        "liquid_flow": {
+          "technique": "Vertex shader morphing",
+          "targets": "All vertices",
+          "interpolation": "Catmull-Rom spline"
+        },
+        "ribbon_flow": {
+          "technique": "Path deformation",
+          "targets": "Ribbon control points",
+          "interpolation": "Bezier curves"
+        }
+      }
+    },
+    "shader_animations": {
+      "time_based": [
+        "Iridescence color cycling",
+        "Noise field evolution",
+        "Fresnel rim pulsing"
+      ],
+      "audio_based": [
+        "Displacement amplitude",
+        "Color temperature",
+        "Opacity variations"
+      ]
+    }
+  },
+  "environment_and_lighting": {
+    "scene_setup": {
+      "background": "Pure black (#000000) or subtle gradient",
+      "fog": {
+        "type": "Exponential",
+        "color": "#000033",
+        "density": 0.001
+      }
+    },
+    "lighting_rig": {
+      "hdri_environment": {
+        "map": "Studio lighting HDRI",
+        "intensity": 0.5,
+        "rotation": "Slow continuous"
+      },
+      "key_light": {
+        "type": "DirectionalLight",
+        "color": "#ffffff",
+        "intensity": 1.0,
+        "position": [5, 10, 5],
+        "shadow": true
+      },
+      "fill_lights": [
+        {
+          "type": "PointLight",
+          "color": "#4A90E2",
+          "intensity": "0.5 + audioData.bass * 0.5",
+          "position": [-10, 0, 0]
+        },
+        {
+          "type": "PointLight",
+          "color": "#E74C3C",
+          "intensity": "0.5 + audioData.mid * 0.5",
+          "position": [10, 0, 0]
+        }
+      ],
+      "rim_light": {
+        "type": "SpotLight",
+        "color": "#ffffff",
+        "intensity": 2.0,
+        "angle": 0.5,
+        "penumbra": 0.5
+      }
+    },
+    "post_processing_effects": {
+      "bloom": {
+        "strength": 1.5,
+        "radius": 0.5,
+        "threshold": 0.8,
+        "audio_reactive": true
+      },
+      "chromatic_aberration": {
+        "offset": "0.002 * audioData.amplitude",
+        "radial": true
+      },
+      "depth_of_field": {
+        "focus": "Orb center",
+        "aperture": 0.025,
+        "maxblur": 0.01
+      },
+      "tone_mapping": {
+        "type": "ACESFilmic",
+        "exposure": 1.2
+      }
+    }
+  },
+  "particle_effects": {
+    "ambient_particles": {
+      "count": 1000,
+      "behavior": "Float around orb",
+      "size": "0.01-0.05",
+      "opacity": "0.1-0.3",
+      "color": "Match orb iridescence"
+    },
+    "reactive_particles": {
+      "emission_trigger": "Audio peaks",
+      "burst_count": "50-200",
+      "initial_velocity": "Outward from surface",
+      "lifetime": "1-3 seconds",
+      "physics": {
+        "gravity": [0, -0.1, 0],
+        "drag": 0.98,
+        "turbulence": "Perlin noise field"
+      }
+    }
+  },
+  "performance_optimization": {
+    "lod_system": {
+      "levels": [
+        {
+          "distance": 0,
+          "vertices": 80000,
+          "features": "All effects enabled"
+        },
+        {
+          "distance": 50,
+          "vertices": 20000,
+          "features": "Reduced particle count"
+        },
+        {
+          "distance": 100,
+          "vertices": 5000,
+          "features": "Basic deformation only"
+        }
+      ]
+    },
+    "rendering_optimization": {
+      "techniques": [
+        "Frustum culling",
+        "GPU instancing for particles",
+        "Texture atlasing",
+        "Shader LOD",
+        "Temporal upsampling"
+      ],
+      "target_performance": {
+        "desktop": "60 FPS at 1920x1080",
+        "mobile": "30 FPS at 1280x720"
+      }
+    },
+    "audio_optimization": {
+      "fft_size": "2048 for desktop, 1024 for mobile",
+      "update_rate": "60Hz capped to display refresh",
+      "smoothing": "Exponential moving average"
+    }
+  },
+  "admin_console_integration": {
+    "websocket_protocol": {
+      "connection": "ws://localhost:8080",
+      "reconnection": "Automatic with exponential backoff",
+      "heartbeat": "Every 30 seconds"
+    },
+    "data_stream": {
+      "format": "Binary ArrayBuffer",
+      "contents": {
+        "frequency_data": "Float32Array[1024]",
+        "waveform_data": "Float32Array[1024]",
+        "amplitude": "Float32",
+        "beat_detected": "Boolean",
+        "timestamp": "Float64"
+      },
+      "compression": "Optional zlib for network efficiency"
+    },
+    "synchronization": {
+      "latency_compensation": "Timestamp-based alignment",
+      "buffer_size": "100ms audio lookahead",
+      "interpolation": "Linear for smooth transitions"
+    }
+  },
+  "user_experience": {
+    "initial_load": {
+      "loading_animation": "Simple pulsing orb outline",
+      "assets_preload": [
+        "Shaders",
+        "Textures",
+        "HDRI environment"
+      ],
+      "progressive_enhancement": "Start with basic orb, add effects"
+    },
+    "interaction": {
+      "mouse_movement": {
+        "effect": "Subtle orb attraction",
+        "intensity": 0.1
+      },
+      "camera_controls": {
+        "type": "OrbitControls",
+        "auto_rotate": true,
+        "damping": true,
+        "limits": {
+          "minDistance": 5,
+          "maxDistance": 20
+        }
+      }
+    },
+    "responsive_design": {
+      "breakpoints": [
+        {
+          "max_width": 768,
+          "adjustments": "Reduce particle count by 50%"
+        },
+        {
+          "max_width": 480,
+          "adjustments": "Simplify shader, disable post-processing"
+        }
+      ]
+    }
+  },
+  "deployment_package": {
+    "build_configuration": {
+      "bundler": "Vite",
+      "optimization": {
+        "tree_shaking": true,
+        "code_splitting": true,
+        "compression": "gzip + brotli"
+      }
+    },
+    "required_assets": {
+      "shaders": [
+        "liquidOrb.vert",
+        "liquidOrb.frag",
+        "ribbon.vert",
+        "ribbon.frag",
+        "particle.vert",
+        "particle.frag"
+      ],
+      "textures": [
+        "iridescence_lut.png",
+        "noise_texture.png",
+        "environment.hdr"
+      ]
+    },
+    "browser_requirements": {
+      "minimum": {
+        "webgl": "WebGL 2.0",
+        "features": [
+          "OES_texture_float",
+          "EXT_color_buffer_float",
+          "OES_standard_derivatives"
+        ]
+      },
+      "recommended": {
+        "gpu": "Dedicated GPU with 2GB VRAM",
+        "cpu": "4+ cores",
+        "ram": "8GB"
+      }
+    }
+  }
+}

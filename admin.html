@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Control Admin Console</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>Audio Control Console</h1>
+            <div class="connection-status">
+                <span class="status-indicator"></span>
+                <span class="status-text">Disconnected</span>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="upload-text">Drag & drop audio file here or click to browse</p>
+                    <p class="upload-formats">Supported: MP3, WAV, OGG, M4A (Max 50MB)</p>
+                    <input type="file" id="audioFileInput" accept=".mp3,.wav,.ogg,.m4a" hidden>
+                </div>
+                
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-text">Uploading...</span>
+                </div>
+            </section>
+
+            <section class="player-section" id="playerSection" style="display: none;">
+                <div class="audio-info">
+                    <h3 class="track-title">No track loaded</h3>
+                    <p class="track-details">--:-- / --:--</p>
+                </div>
+
+                <div class="waveform-container">
+                    <canvas id="waveformCanvas"></canvas>
+                    <div class="playhead"></div>
+                </div>
+
+                <div class="player-controls">
+                    <button class="control-btn" id="playPauseBtn">
+                        <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                            <rect x="6" y="4" width="4" height="16"></rect>
+                            <rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    </button>
+
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span>
+                        <span>/</span>
+                        <span id="totalTime">0:00</span>
+                    </div>
+
+                    <div class="volume-control">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                        <input type="range" id="volumeSlider" min="0" max="100" value="75">
+                    </div>
+                </div>
+
+                <div class="broadcast-controls">
+                    <button class="broadcast-btn" id="broadcastBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="2"></circle>
+                            <path d="M16.24 7.76a6 6 0 0 1 0 8.49"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                        <span>Start Broadcasting</span>
+                    </button>
+                    <div class="connected-clients">
+                        <span class="client-count">0</span> clients connected
+                    </div>
+                </div>
+            </section>
+
+            <section class="frequency-monitor" id="frequencyMonitor" style="display: none;">
+                <h3>Real-time Frequency Analysis</h3>
+                <canvas id="frequencyCanvas"></canvas>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

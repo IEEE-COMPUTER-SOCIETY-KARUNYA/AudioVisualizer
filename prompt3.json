@@ -1,0 +1,394 @@
+{
+  "project": {
+    "name": "Multi-Orb Voice Assistant - Audio Reactive UI",
+    "version": "3.0.0",
+    "type": "web-application",
+    "description": "A sophisticated voice assistant interface featuring multiple reactive orbs, each responding to different frequency bands with unique visual styles"
+  },
+  "ui_layout": {
+    "design_reference": "Modern voice assistant with 4 distinct audio-reactive orbs",
+    "page_structure": {
+      "header": {
+        "left": {
+          "avatar": "User profile image",
+          "text": "Voice Assistant",
+          "font": "Clean, modern sans-serif",
+          "color": "#FFFFFF"
+        },
+        "right": {
+          "logo": "Figma or app logo",
+          "background": "#FFFFFF",
+          "borderRadius": "12px"
+        }
+      },
+      "main_content": {
+        "layout": "Horizontal flex container",
+        "alignment": "Center",
+        "gap": "60px",
+        "background": "#0F0F0F to #1A1A1A gradient"
+      }
+    }
+  },
+  "orb_specifications": {
+    "common_properties": {
+      "size": "200x200px base dimension",
+      "container": "Square with subtle shadow",
+      "hover_effect": "Slight scale increase (1.05x)",
+      "click_effect": "Ripple animation",
+      "base_animation": "Gentle floating motion"
+    },
+    "orbs": [
+      {
+        "id": "orb_1",
+        "name": "Flow Orb",
+        "frequency_range": "20-250Hz (Bass)",
+        "visual_style": {
+          "base_color": "#3B82F6",
+          "gradient": "Radial gradient from #60A5FA to #2563EB",
+          "effect": "Flowing curved lines",
+          "description": "Smooth flowing lines that bend and curve based on bass frequencies"
+        },
+        "geometry": {
+          "type": "Sphere with flow field lines",
+          "line_count": 50,
+          "line_behavior": "Bezier curves flowing through sphere"
+        },
+        "animations": {
+          "idle": {
+            "line_flow_speed": 0.5,
+            "rotation": "0.1 rad/s on Y axis"
+          },
+          "active": {
+            "line_amplitude": "Bass amplitude * 2",
+            "line_frequency": "Oscillate with beat",
+            "color_shift": "Brighten on peaks"
+          }
+        },
+        "shader_features": {
+          "glow": "Soft blue glow",
+          "transparency": 0.9,
+          "blur": "Motion blur on fast movements"
+        }
+      },
+      {
+        "id": "orb_2",
+        "name": "Waveform Orb",
+        "frequency_range": "250-2000Hz (Mid)",
+        "visual_style": {
+          "base_color": "#8B5CF6",
+          "gradient": "Linear gradient #A78BFA to #6D28D9",
+          "effect": "Audio waveform visualization",
+          "description": "Classic waveform display wrapped in spherical form"
+        },
+        "geometry": {
+          "type": "Waveform mesh",
+          "samples": 128,
+          "wrap_mode": "Spherical projection"
+        },
+        "animations": {
+          "idle": {
+            "wave_amplitude": 0.1,
+            "wave_speed": 1.0
+          },
+          "active": {
+            "wave_amplitude": "Direct audio waveform",
+            "smoothing": 0.8,
+            "peak_highlight": "White flash on transients"
+          }
+        },
+        "shader_features": {
+          "emission": "Purple glow on peaks",
+          "trail_effect": "Ghosting previous frames",
+          "noise": "Subtle grain texture"
+        }
+      },
+      {
+        "id": "orb_3",
+        "name": "Geometric Orb",
+        "frequency_range": "2000-8000Hz (High-Mid)",
+        "visual_style": {
+          "base_color": "#EC4899",
+          "gradient": "Conical gradient with multiple colors",
+          "effect": "Geometric shapes morphing",
+          "description": "Angular geometric patterns that shift with high frequencies"
+        },
+        "geometry": {
+          "type": "Low-poly sphere",
+          "faces": 200,
+          "subdivision": "Dynamic based on frequency"
+        },
+        "animations": {
+          "idle": {
+            "rotation": "0.2 rad/s on X and Y",
+            "face_scale": "Subtle breathing effect"
+          },
+          "active": {
+            "face_extrusion": "Based on frequency energy",
+            "color_mapping": "Frequency to hue",
+            "fragmentation": "Split faces on peaks"
+          }
+        },
+        "shader_features": {
+          "refraction": "Glass-like material",
+          "chromatic_aberration": "On edges",
+          "bloom": "Intense on high frequencies"
+        }
+      },
+      {
+        "id": "orb_4",
+        "name": "Radial Orb",
+        "frequency_range": "8000-20000Hz (High)",
+        "visual_style": {
+          "base_color": "#D4A574",
+          "gradient": "Radial burst pattern",
+          "effect": "Radial lines pulsing outward",
+          "description": "Sun-burst pattern reacting to high frequencies"
+        },
+        "geometry": {
+          "type": "Radial line system",
+          "line_count": 360,
+          "origin": "Center point"
+        },
+        "animations": {
+          "idle": {
+            "line_length": "0.5 to 1.0 oscillating",
+            "rotation": "Slow clockwise"
+          },
+          "active": {
+            "line_length": "Extends with amplitude",
+            "line_thickness": "Varies with frequency",
+            "burst_effect": "Radial explosion on peaks"
+          }
+        },
+        "shader_features": {
+          "gradient_lines": "Fade from center",
+          "glow": "Golden emission",
+          "particle_spawn": "Sparkles on high frequencies"
+        }
+      }
+    ]
+  },
+  "audio_processing": {
+    "frequency_analysis": {
+      "fft_size": 2048,
+      "bin_grouping": {
+        "bass": {
+          "range": "20-250Hz",
+          "bins": "0-10",
+          "smoothing": 0.9,
+          "assigned_to": "orb_1"
+        },
+        "mid": {
+          "range": "250-2000Hz",
+          "bins": "11-85",
+          "smoothing": 0.85,
+          "assigned_to": "orb_2"
+        },
+        "high_mid": {
+          "range": "2000-8000Hz",
+          "bins": "86-340",
+          "smoothing": 0.8,
+          "assigned_to": "orb_3"
+        },
+        "high": {
+          "range": "8000-20000Hz",
+          "bins": "341-1024",
+          "smoothing": 0.7,
+          "assigned_to": "orb_4"
+        }
+      }
+    },
+    "feature_extraction": {
+      "per_orb_data": {
+        "amplitude": "RMS of frequency range",
+        "peak_frequency": "Dominant frequency in range",
+        "spectral_centroid": "Brightness indicator",
+        "zero_crossing_rate": "Texture indicator"
+      }
+    }
+  },
+  "scene_configuration": {
+    "three_js_setup": {
+      "renderer": {
+        "antialias": true,
+        "alpha": true,
+        "powerPreference": "high-performance"
+      },
+      "scene": {
+        "background": null,
+        "fog": "None - clean presentation"
+      },
+      "cameras": {
+        "main": {
+          "type": "PerspectiveCamera",
+          "fov": 50,
+          "position": [0, 0, 10],
+          "lookAt": [0, 0, 0]
+        }
+      }
+    },
+    "lighting": {
+      "ambient": {
+        "color": "#FFFFFF",
+        "intensity": 0.4
+      },
+      "directional": {
+        "color": "#FFFFFF",
+        "intensity": 0.6,
+        "position": [5, 5, 5]
+      },
+      "per_orb_lights": {
+        "enabled": true,
+        "type": "PointLight",
+        "intensity": "Audio reactive",
+        "color": "Match orb base color"
+      }
+    }
+  },
+  "animation_system": {
+    "gsap_configuration": {
+      "global_timeline": {
+        "name": "masterTimeline",
+        "defaults": {
+          "ease": "power2.inOut",
+          "duration": 0.3
+        }
+      },
+      "per_orb_timelines": {
+        "structure": "Independent timeline per orb",
+        "synchronization": "Via audio clock",
+        "interpolation": "Smooth between states"
+      }
+    },
+    "animation_types": {
+      "continuous": [
+        "Idle floating motion",
+        "Slow rotation",
+        "Ambient glow pulsing"
+      ],
+      "reactive": [
+        "Scale changes on amplitude",
+        "Color shifts on frequency changes",
+        "Geometry deformation on beats",
+        "Particle bursts on peaks"
+      ],
+      "transitions": [
+        "Smooth morphing between states",
+        "Elastic bounce on sudden changes",
+        "Fade effects for appearance/disappearance"
+      ]
+    }
+  },
+  "responsive_design": {
+    "breakpoints": [
+      {
+        "name": "desktop",
+        "min_width": 1024,
+        "orb_layout": "Horizontal row",
+        "orb_size": "200px"
+      },
+      {
+        "name": "tablet",
+        "width": "768-1023px",
+        "orb_layout": "2x2 grid",
+        "orb_size": "150px"
+      },
+      {
+        "name": "mobile",
+        "max_width": 767,
+        "orb_layout": "Vertical stack",
+        "orb_size": "120px"
+      }
+    ],
+    "performance_scaling": {
+      "high_end": "All effects enabled",
+      "mid_range": "Reduce particle count by 50%",
+      "low_end": "Basic shapes only, no particles"
+    }
+  },
+  "websocket_integration": {
+    "data_flow": {
+      "from_admin": {
+        "frequency": "60 times per second",
+        "payload": {
+          "timestamp": "number",
+          "frequencyData": {
+            "bass": "Float32Array",
+            "mid": "Float32Array",
+            "highMid": "Float32Array",
+            "high": "Float32Array"
+          },
+          "features": {
+            "amplitude": "number",
+            "isBeat": "boolean",
+            "bpm": "number"
+          }
+        }
+      }
+    },
+    "error_handling": {
+      "connection_lost": "Show connection indicator",
+      "data_corruption": "Use last valid frame",
+      "latency_compensation": "Predictive interpolation"
+    }
+  },
+  "implementation_priorities": {
+    "phase_1": [
+      "Basic orb rendering with static appearance",
+      "WebSocket connection establishment",
+      "Simple amplitude-based scaling"
+    ],
+    "phase_2": [
+      "Frequency band separation",
+      "Individual orb behaviors",
+      "GSAP animation system"
+    ],
+    "phase_3": [
+      "Advanced shaders and effects",
+      "Particle systems",
+      "Performance optimizations"
+    ]
+  },
+  "technical_requirements": {
+    "dependencies": {
+      "three": "^0.128.0",
+      "gsap": "^3.12.0",
+      "socket.io-client": "^4.0.0"
+    },
+    "browser_support": {
+      "minimum": "Chrome 90+, Firefox 88+, Safari 14+",
+      "required_apis": [
+        "WebGL 2.0",
+        "Web Audio API",
+        "WebSocket"
+      ]
+    }
+  },
+  "visual_polish": {
+    "effects": {
+      "orb_glow": {
+        "implementation": "Bloom post-processing",
+        "intensity": "Audio reactive"
+      },
+      "motion_trails": {
+        "implementation": "Frame blending",
+        "opacity": 0.3
+      },
+      "depth_of_field": {
+        "implementation": "Optional for high-end",
+        "focus": "Currently active orb"
+      }
+    },
+    "ui_elements": {
+      "connection_status": {
+        "position": "Top right",
+        "states": ["Connected", "Connecting", "Disconnected"],
+        "style": "Minimal dot indicator"
+      },
+      "fps_counter": {
+        "position": "Bottom right",
+        "visibility": "Developer mode only"
+      }
+    }
+  }
+}

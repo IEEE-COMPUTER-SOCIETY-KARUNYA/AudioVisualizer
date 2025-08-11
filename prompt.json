@@ -1,0 +1,422 @@
+{
+  "project": {
+    "name": "Audio Reactive AI Voice Assistant UI",
+    "version": "1.0.0",
+    "type": "web-application",
+    "description": "A sophisticated audio-reactive visualization system with AI voice assistant aesthetic, featuring real-time frequency analysis and dynamic 3D animations"
+  },
+  "technical_requirements": {
+    "core_technologies": {
+      "rendering": "Three.js (r128+)",
+      "animation": "GSAP 3.12+",
+      "audio_processing": "Web Audio API",
+      "framework": "React 18+ or Vanilla JS",
+      "bundler": "Vite or Webpack 5"
+    },
+    "browser_support": {
+      "minimum": ["Chrome 90+", "Firefox 88+", "Safari 14+", "Edge 90+"],
+      "webgl_requirement": "WebGL 2.0"
+    },
+    "performance_targets": {
+      "fps": "60fps minimum",
+      "audio_latency": "<20ms",
+      "memory_usage": "<200MB",
+      "load_time": "<3s initial load"
+    }
+  },
+  "architecture": {
+    "pages": [
+      {
+        "name": "visualization_page",
+        "route": "/",
+        "description": "Main audio-reactive visualization interface",
+        "components": {
+          "audio_visualizer": {
+            "type": "3D WebGL Canvas",
+            "framework": "Three.js + GSAP",
+            "features": [
+              "Real-time frequency analysis",
+              "Dynamic particle systems",
+              "Morphing geometries",
+              "Shader-based effects",
+              "Responsive to audio amplitude and frequency"
+            ]
+          },
+          "websocket_client": {
+            "purpose": "Receive audio stream from admin console",
+            "protocol": "WebSocket or WebRTC"
+          }
+        }
+      },
+      {
+        "name": "admin_console",
+        "route": "/admin",
+        "description": "Simple control interface for audio management",
+        "components": {
+          "audio_uploader": {
+            "accepted_formats": ["mp3", "wav", "ogg", "m4a"],
+            "max_file_size": "50MB",
+            "validation": "Client and server-side"
+          },
+          "audio_player": {
+            "controls": ["play", "pause", "seek", "volume"],
+            "features": ["Progress bar", "Time display", "Volume slider"]
+          },
+          "broadcast_controller": {
+            "purpose": "Stream audio to visualization page",
+            "method": "WebSocket broadcast or shared state"
+          }
+        }
+      }
+    ]
+  },
+  "visualization_specifications": {
+    "core_visual_element": {
+      "description": "Central AI orb/sphere that responds to audio",
+      "geometry": {
+        "base_shape": "Icosphere or UV Sphere",
+        "vertex_count": "10,000-50,000 for smooth deformation",
+        "material": {
+          "type": "Custom ShaderMaterial",
+          "features": [
+            "Iridescent/holographic effect",
+            "Fresnel rim lighting",
+            "Noise-based distortion",
+            "Color gradients mapped to frequency bands"
+          ]
+        }
+      },
+      "animations": {
+        "idle_state": {
+          "description": "Gentle pulsing and rotation when no audio",
+          "parameters": {
+            "pulse_frequency": "0.5-1Hz",
+            "rotation_speed": "0.1-0.3 rad/s",
+            "noise_amplitude": "0.02-0.05"
+          }
+        },
+        "active_state": {
+          "description": "Dynamic response to audio input",
+          "behaviors": [
+            {
+              "trigger": "Low frequencies (20-250Hz)",
+              "response": "Scale pulsing, vertex displacement",
+              "intensity": "Proportional to amplitude"
+            },
+            {
+              "trigger": "Mid frequencies (250-4000Hz)",
+              "response": "Surface ripples, color shifts",
+              "intensity": "Mapped to frequency energy"
+            },
+            {
+              "trigger": "High frequencies (4000-20000Hz)",
+              "response": "Particle emissions, glow intensity",
+              "intensity": "Sharp spikes create bursts"
+            }
+          ]
+        }
+      }
+    },
+    "environment": {
+      "background": {
+        "type": "Dark gradient or starfield",
+        "color_scheme": ["#000000", "#0a0a1f", "#1a1a3e"]
+      },
+      "lighting": {
+        "ambient": "Low intensity (0.1-0.2)",
+        "point_lights": [
+          {
+            "position": "Orbiting around main element",
+            "color": "Reactive to audio",
+            "count": "3-5 lights"
+          }
+        ],
+        "rim_light": "Dynamic based on frequency"
+      },
+      "post_processing": {
+        "effects": [
+          "Bloom (reactive intensity)",
+          "Chromatic aberration (on peaks)",
+          "Film grain (subtle)",
+          "Vignette"
+        ]
+      }
+    },
+    "particle_systems": {
+      "primary_system": {
+        "particle_count": "5000-10000",
+        "behavior": "Orbiting main element",
+        "spawn_rate": "Tied to audio amplitude",
+        "lifetime": "2-5 seconds",
+        "physics": {
+          "gravity": "Towards center",
+          "turbulence": "Perlin noise field",
+          "collision": "Repel from main sphere"
+        }
+      },
+      "secondary_effects": {
+        "frequency_rings": {
+          "description": "Concentric rings pulsing outward",
+          "trigger": "Beat detection",
+          "material": "Additive blending"
+        },
+        "energy_tendrils": {
+          "description": "Lightning-like connections",
+          "trigger": "Harmonic peaks",
+          "implementation": "Bezier curves with animated vertices"
+        }
+      }
+    }
+  },
+  "audio_processing": {
+    "analyzer_configuration": {
+      "fft_size": 2048,
+      "smoothing_time_constant": 0.8,
+      "frequency_bins": 1024,
+      "sample_rate": 44100
+    },
+    "feature_extraction": {
+      "beat_detection": {
+        "algorithm": "Energy-based peak detection",
+        "threshold": "Dynamic based on recent history",
+        "cooldown": "100ms between beats"
+      },
+      "frequency_bands": [
+        {
+          "name": "sub_bass",
+          "range": "20-60Hz",
+          "visual_mapping": "Core sphere scale"
+        },
+        {
+          "name": "bass",
+          "range": "60-250Hz",
+          "visual_mapping": "Vertex displacement amplitude"
+        },
+        {
+          "name": "low_mid",
+          "range": "250-500Hz",
+          "visual_mapping": "Rotation speed"
+        },
+        {
+          "name": "mid",
+          "range": "500-2000Hz",
+          "visual_mapping": "Color hue shift"
+        },
+        {
+          "name": "high_mid",
+          "range": "2000-4000Hz",
+          "visual_mapping": "Particle emission rate"
+        },
+        {
+          "name": "high",
+          "range": "4000-20000Hz",
+          "visual_mapping": "Glow intensity, detail effects"
+        }
+      ],
+      "amplitude_tracking": {
+        "window_size": "50ms",
+        "peak_detection": true,
+        "rms_calculation": true
+      }
+    }
+  },
+  "implementation_details": {
+    "shader_code_structure": {
+      "vertex_shader": {
+        "uniforms": [
+          "time",
+          "audioData",
+          "frequencyData",
+          "amplitude"
+        ],
+        "displacement_formula": "position + normal * sin(time + audioData[index]) * amplitude"
+      },
+      "fragment_shader": {
+        "effects": [
+          "Iridescent color mapping",
+          "Fresnel effect",
+          "Emission based on frequency",
+          "Noise-based texture"
+        ]
+      }
+    },
+    "gsap_animations": {
+      "timeline_structure": {
+        "master_timeline": "Controls overall animation flow",
+        "audio_reactive_timeline": "Triggered by audio events",
+        "ambient_timeline": "Continuous background animations"
+      },
+      "animation_registry": [
+        {
+          "name": "pulse",
+          "target": "mesh.scale",
+          "duration": "0.1-0.5s",
+          "ease": "power2.out"
+        },
+        {
+          "name": "rotate",
+          "target": "mesh.rotation",
+          "duration": "continuous",
+          "ease": "none"
+        },
+        {
+          "name": "morph",
+          "target": "geometry.vertices",
+          "duration": "0.2-1s",
+          "ease": "elastic.out"
+        }
+      ]
+    },
+    "optimization_strategies": {
+      "geometry": [
+        "Use BufferGeometry for all meshes",
+        "Implement LOD (Level of Detail) system",
+        "Merge geometries where possible"
+      ],
+      "rendering": [
+        "Frustum culling",
+        "Occlusion culling for particles",
+        "Texture atlasing",
+        "Instanced rendering for particles"
+      ],
+      "audio": [
+        "Downsample frequency data for visuals",
+        "Use requestAnimationFrame for updates",
+        "Implement frame skipping on low performance"
+      ]
+    }
+  },
+  "admin_console_specifications": {
+    "ui_design": {
+      "layout": "Minimalist, single column",
+      "color_scheme": {
+        "primary": "#1a1a1a",
+        "secondary": "#2a2a2a",
+        "accent": "#00ff88",
+        "text": "#ffffff"
+      },
+      "components": {
+        "file_upload": {
+          "style": "Drag and drop area",
+          "feedback": "Progress bar, file info display",
+          "validation": "Real-time format checking"
+        },
+        "audio_controls": {
+          "play_button": "Large, centered",
+          "progress_bar": "Full width",
+          "volume_slider": "Vertical or horizontal",
+          "time_display": "Current/Total format"
+        },
+        "status_indicator": {
+          "states": ["Idle", "Loading", "Playing", "Paused", "Error"],
+          "visual": "Color-coded icon or text"
+        }
+      }
+    },
+    "functionality": {
+      "audio_handling": {
+        "upload_process": [
+          "File validation",
+          "Conversion if needed",
+          "Waveform generation",
+          "Metadata extraction"
+        ],
+        "playback_sync": {
+          "method": "WebSocket events",
+          "latency_compensation": true,
+          "buffering_strategy": "Progressive download"
+        }
+      }
+    }
+  },
+  "communication_protocol": {
+    "websocket_events": {
+      "from_admin": [
+        {
+          "event": "audio:play",
+          "payload": {
+            "timestamp": "number",
+            "audioId": "string"
+          }
+        },
+        {
+          "event": "audio:pause",
+          "payload": {
+            "timestamp": "number",
+            "position": "number"
+          }
+        },
+        {
+          "event": "audio:data",
+          "payload": {
+            "frequencyData": "Float32Array",
+            "waveformData": "Float32Array",
+            "amplitude": "number"
+          }
+        }
+      ],
+      "from_visualization": [
+        {
+          "event": "client:ready",
+          "payload": {
+            "clientId": "string"
+          }
+        },
+        {
+          "event": "performance:metrics",
+          "payload": {
+            "fps": "number",
+            "latency": "number"
+          }
+        }
+      ]
+    }
+  },
+  "deployment_considerations": {
+    "hosting": {
+      "static_assets": "CDN recommended",
+      "websocket_server": "Node.js with Socket.io or native WebSocket",
+      "audio_processing": "Server-side option for consistency"
+    },
+    "scalability": {
+      "multi_client_support": "Broadcast to multiple visualization instances",
+      "load_balancing": "For WebSocket connections",
+      "caching": "Audio file caching strategy"
+    }
+  },
+  "testing_requirements": {
+    "unit_tests": [
+      "Audio processing algorithms",
+      "Geometry deformation functions",
+      "WebSocket communication"
+    ],
+    "integration_tests": [
+      "Audio upload and playback flow",
+      "Synchronization between pages",
+      "Performance under various audio types"
+    ],
+    "performance_tests": [
+      "Frame rate with complex audio",
+      "Memory usage over time",
+      "Network latency impact"
+    ]
+  },
+  "deliverables": {
+    "required_files": [
+      "index.html - Main visualization page",
+      "admin.html - Admin console page",
+      "visualization.js - Three.js scene and animations",
+      "audio-processor.js - Web Audio API integration",
+      "websocket-client.js - Communication layer",
+      "shaders/ - Vertex and fragment shaders",
+      "styles/ - CSS for both pages",
+      "server.js - WebSocket server"
+    ],
+    "documentation": [
+      "API documentation for WebSocket events",
+      "Setup and deployment guide",
+      "Performance tuning guide",
+      "Shader customization guide"
+    ]
+  }
+}

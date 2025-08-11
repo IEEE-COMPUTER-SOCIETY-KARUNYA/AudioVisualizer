@@ -1,0 +1,45 @@
+{
+  "name": "audio-reactive-ai-voice-assistant-ui",
+  "version": "1.0.0",
+  "description": "A sophisticated audio-reactive visualization system with AI voice assistant aesthetic, featuring real-time frequency analysis and dynamic 3D animations",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build process required for client-side only app'",
+    "test": "echo 'No tests specified' && exit 0"
+  },
+  "keywords": [
+    "audio",
+    "visualization",
+    "three.js",
+    "webgl",
+    "websocket",
+    "real-time",
+    "frequency-analysis",
+    "3d-animation",
+    "ai-voice-assistant"
+  ],
+  "author": "Audio Visualization Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/audio-reactive-ai-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/audio-reactive-ai-ui/issues"
+  },
+  "homepage": "https://github.com/your-username/audio-reactive-ai-ui#readme"
+}
